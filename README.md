@@ -5,6 +5,7 @@ Mackerel::Client - API Client for mackerel.io
 # SYNOPSIS
 
     use Mackerel::Client;
+    my $mackerel = Mackerel::Client->new(api_key => 'key', service_name => 'service');
 
 # DESCRIPTION
 

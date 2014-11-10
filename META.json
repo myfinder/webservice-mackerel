@@ -1,7 +1,7 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "API Client for mackerel.io",
    "author" : [
-      "Tatsuro Hisamori <medianetworks@gmail.com>"
+      "Tatsuro Hisamori <myfinder@cpan.org>"
    ],
    "dynamic_config" : 0,
    "generated_by" : "Minilla/v2.2.0, CPAN::Meta::Converter version 2.142690",
@@ -47,10 +47,25 @@
       },
       "test" : {
          "requires" : {
+            "Test::Double" : "0.05",
             "Test::More" : "0.98"
          }
       }
    },
    "release_status" : "unstable",
-   "version" : "0.01"
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/myfinder/mackerel-client/issues"
+      },
+      "homepage" : "https://github.com/myfinder/mackerel-client",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/myfinder/mackerel-client.git",
+         "web" : "https://github.com/myfinder/mackerel-client"
+      }
+   },
+   "version" : "0.01",
+   "x_contributors" : [
+      "Tatsuro Hisamori <medianetworks@gmail.com>"
+   ]
 }
