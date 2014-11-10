@@ -1,0 +1,4 @@
+name = "Mackerel-Client"
+# badges = ["travis"]
+module_maker="ModuleBuildTiny"
+
