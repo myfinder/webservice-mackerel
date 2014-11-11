@@ -125,6 +125,20 @@ DISTRIBUTIONS
       File::Spec 0.8
       Pod::Man 0
       perl 5.006
+  HTTP-Tiny-0.050
+    pathname: D/DA/DAGOLDEN/HTTP-Tiny-0.050.tar.gz
+    provides:
+      HTTP::Tiny 0.050
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 6.17
+      Fcntl 0
+      IO::Socket 0
+      MIME::Base64 0
+      Time::Local 0
+      bytes 0
+      strict 0
+      warnings 0
   Hash-FieldHash-0.14
     pathname: G/GF/GFUJI/Hash-FieldHash-0.14.tar.gz
     provides:
@@ -154,6 +168,15 @@ DISTRIBUTIONS
       parent 0
       strict 0
       warnings 0
+  JSON-2.90
+    pathname: M/MA/MAKAMAKA/JSON-2.90.tar.gz
+    provides:
+      JSON 2.90
+      JSON::Backend::PP 2.90
+      JSON::Boolean 2.90
+    requirements:
+      ExtUtils::MakeMaker 0
+      Test::More 0
   List-MoreUtils-0.33
     pathname: A/AD/ADAMK/List-MoreUtils-0.33.tar.gz
     provides:
