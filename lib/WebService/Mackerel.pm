@@ -5,7 +5,7 @@ use warnings;
 use JSON;
 use HTTP::Tiny;
 
-our $VERSION = "0.01_1";
+our $VERSION = "0.01_2";
 
 sub new {
     my ($class, %args) = @_;

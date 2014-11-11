@@ -57,16 +57,16 @@
    "release_status" : "unstable",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/myfinder/mackerel-client/issues"
+         "web" : "https://github.com/myfinder/webservice-mackerel/issues"
       },
-      "homepage" : "https://github.com/myfinder/mackerel-client",
+      "homepage" : "https://github.com/myfinder/webservice-mackerel",
       "repository" : {
          "type" : "git",
-         "url" : "git://github.com/myfinder/mackerel-client.git",
-         "web" : "https://github.com/myfinder/mackerel-client"
+         "url" : "git://github.com/myfinder/webservice-mackerel.git",
+         "web" : "https://github.com/myfinder/webservice-mackerel"
       }
    },
-   "version" : "0.01_1",
+   "version" : "0.01_2",
    "x_contributors" : [
       "Tatsuro Hisamori <medianetworks@gmail.com>"
    ]
