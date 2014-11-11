@@ -1,15 +1,15 @@
 # NAME
 
-Mackerel::Client - API Client for mackerel.io
+WebService::Mackerel - API Client for mackerel.io
 
 # SYNOPSIS
 
-    use Mackerel::Client;
-    my $mackerel = Mackerel::Client->new(api_key => 'key', service_name => 'service');
+    use WebService::Mackerel;
+    my $mackerel = WebService::Mackerel->new(api_key => 'key', service_name => 'service');
 
 # DESCRIPTION
 
-Mackerel::Client is API Client for mackerel.io
+WebService::Mackerel is API Client for mackerel.io
 
 # LICENSE
 

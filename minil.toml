@@ -1,4 +1,4 @@
-name = "Mackerel-Client"
+name = "WebService-Mackerel"
 # badges = ["travis"]
 module_maker="ModuleBuildTiny"
 

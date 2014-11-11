@@ -1,4 +1,4 @@
-package Mackerel::Client;
+package WebService::Mackerel;
 use 5.008001;
 use strict;
 use warnings;
@@ -13,7 +13,7 @@ sub new {
         api_key         => $args{api_key},
         service_name    => $args{service_name},
         mackerel_origin => 'https://mackerel.io' || $args{mackerel_origin},
-        agent           => HTTP::Tiny->new( agent => "Mackerel::Client agent" ),
+        agent           => HTTP::Tiny->new( agent => "WebService::Mackerel agent" ),
     };
     bless $self, $class;
 }
@@ -38,16 +38,16 @@ __END__
 
 =head1 NAME
 
-Mackerel::Client - API Client for mackerel.io
+WebService::Mackerel - API Client for mackerel.io
 
 =head1 SYNOPSIS
 
-    use Mackerel::Client;
-    my $mackerel = Mackerel::Client->new(api_key => 'key', service_name => 'service');
+    use WebService::Mackerel;
+    my $mackerel = WebService::Mackerel->new(api_key => 'key', service_name => 'service');
 
 =head1 DESCRIPTION
 
-Mackerel::Client is API Client for mackerel.io
+WebService::Mackerel is API Client for mackerel.io
 
 =head1 LICENSE
 
