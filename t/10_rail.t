@@ -1,9 +1,7 @@
 use strict;
 use Test::More;
 use Test::Double;
-use HTTP::Response;
 use JSON qw/encode_json decode_json/;
-use Data::Dumper;
 
 use Mackerel::Client;
 
