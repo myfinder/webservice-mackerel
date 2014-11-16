@@ -11,18 +11,55 @@ sub new {
     my ($class, %args) = @_;
     my $self = {
         api_key         => $args{api_key},
-        service_name    => $args{service_name},
-        mackerel_origin => 'https://mackerel.io' || $args{mackerel_origin},
-        agent           => HTTP::Tiny->new( agent => "WebService::Mackerel agent" ),
+        service_name    => $args{service_name} || '',
+        mackerel_origin => $args{mackerel_origin} || 'https://mackerel.io',
+        agent           => HTTP::Tiny->new( agent => "WebService::Mackerel agent $VERSION" ),
     };
     bless $self, $class;
 }
 
 sub post_service_metrics {
-    my ($self,$args) = @_;
+    my ($self, $args) = @_;
     my $path = '/api/v0/services/' . $self->{service_name} . '/tsdb';
     my $res  = $self->{agent}->request('POST', $self->{mackerel_origin} . $path, {
             content => encode_json $args,
+            headers => {
+                'content-type' => 'application/json',
+                'X-Api-Key'    => $self->{api_key},
+            },
+        });
+    return $res->{content};
+}
+
+sub create_host {
+    my ($self, $args) = @_;
+    my $path = '/api/v0/hosts';
+    my $res  = $self->{agent}->request('POST', $self->{mackerel_origin} . $path, {
+            content => encode_json $args,
+            headers => {
+                'content-type' => 'application/json',
+                'X-Api-Key'    => $self->{api_key},
+            },
+        });
+    return $res->{content};
+}
+
+sub get_host {
+    my ($self, $hostId) = @_;
+    my $path = '/api/v0/hosts/' . $hostId;
+    my $res  = $self->{agent}->request('GET', $self->{mackerel_origin} . $path, {
+            headers => {
+                'X-Api-Key'    => $self->{api_key},
+            },
+        });
+    return $res->{content};
+}
+
+sub update_host {
+    my ($self, $args) = @_;
+    my $path = '/api/v0/hosts/' . $args->{hostId};
+    my $res  = $self->{agent}->request('PUT', $self->{mackerel_origin} . $path, {
+            content => encode_json $args->{data},
             headers => {
                 'content-type' => 'application/json',
                 'X-Api-Key'    => $self->{api_key},
@@ -61,4 +98,3 @@ it under the same terms as Perl itself.
 Tatsuro Hisamori E<lt>myfinder@cpan.orgE<gt>
 
 =cut
-
