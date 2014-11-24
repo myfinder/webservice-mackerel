@@ -2,6 +2,7 @@ package WebService::Mackerel;
 use 5.008001;
 use strict;
 use warnings;
+use Carp qw/croak/;
 use JSON;
 use HTTP::Tiny;
 
@@ -9,9 +10,11 @@ our $VERSION = "0.01_2";
 
 sub new {
     my ($class, %args) = @_;
+    $args{api_key} or croak "api key is required";
+    $args{service_name} or croak "service name is required";
     my $self = {
         api_key         => $args{api_key},
-        service_name    => $args{service_name} || '',
+        service_name    => $args{service_name},
         mackerel_origin => $args{mackerel_origin} || 'https://mackerel.io',
         agent           => HTTP::Tiny->new( agent => "WebService::Mackerel agent $VERSION" ),
     };
