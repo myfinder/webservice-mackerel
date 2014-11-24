@@ -48,8 +48,8 @@ sub create_host {
 }
 
 sub get_host {
-    my ($self, $hostId) = @_;
-    my $path = '/api/v0/hosts/' . $hostId;
+    my ($self, $host_id) = @_;
+    my $path = '/api/v0/hosts/' . $host_id;
     my $res  = $self->{agent}->request('GET', $self->{mackerel_origin} . $path, {
             headers => {
                 'X-Api-Key'    => $self->{api_key},
@@ -60,9 +60,35 @@ sub get_host {
 
 sub update_host {
     my ($self, $args) = @_;
-    my $path = '/api/v0/hosts/' . $args->{hostId};
+    my $path = '/api/v0/hosts/' . $args->{host_id};
     my $res  = $self->{agent}->request('PUT', $self->{mackerel_origin} . $path, {
             content => encode_json $args->{data},
+            headers => {
+                'content-type' => 'application/json',
+                'X-Api-Key'    => $self->{api_key},
+            },
+        });
+    return $res->{content};
+}
+
+sub update_host_status {
+    my ($self, $args) = @_;
+    my $path = '/api/v0/hosts/' . $args->{host_id} . '/status';
+    my $res  = $self->{agent}->request('POST', $self->{mackerel_origin} . $path, {
+            content => encode_json $args->{data},
+            headers => {
+                'content-type' => 'application/json',
+                'X-Api-Key'    => $self->{api_key},
+            },
+        });
+    return $res->{content};
+}
+
+sub host_retire {
+    my ($self, $args) = @_;
+    my $path = '/api/v0/hosts/' . $args->{host_id} . '/retire';
+    my $res  = $self->{agent}->request('POST', $self->{mackerel_origin} . $path, {
+            content => encode_json +{},
             headers => {
                 'content-type' => 'application/json',
                 'X-Api-Key'    => $self->{api_key},
