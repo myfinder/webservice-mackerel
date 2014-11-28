@@ -131,4 +131,50 @@ subtest 'host_retire' => sub {
     Test::Double->reset;
 };
 
+subtest 'post_host_metrics' => sub {
+    my $fake_res = encode_json({ "success" => "true" });
+    my $mackerel = WebService::Mackerel->new( api_key  => 'testapikey', service_name => 'test' );
+    mock($mackerel)->expects('post_host_metrics')->times(1)->returns($fake_res);
+
+    my $res = $mackerel->post_host_metrics([ {"hostId" => "fake_host_id", "name" => "metric_name", "time" => "1415609260", "value" => 200} ]);
+
+    is_deeply $res, $fake_res, 'post_service_metrics : response success';
+
+    Test::Double->verify;
+    Test::Double->reset;
+};
+
+subtest 'get_latest_host_metrics' => sub {
+    my $fake_res = encode_json({ "tsdbLatest" => { "fake_host_id" => { "metric_name" => 200, } } });
+    my $mackerel = WebService::Mackerel->new( api_key  => 'testapikey', service_name => 'test' );
+    mock($mackerel)->expects('get_latest_host_metrics')->times(1)->returns($fake_res);
+
+    my $res = $mackerel->get_latest_host_metrics([ {"hostId" => "fake_host_id", "name" => "metric_name"} ]);
+
+    is_deeply $res, $fake_res, 'get_latest_host_metrics : response success';
+
+    Test::Double->verify;
+    Test::Double->reset;
+};
+
+subtest 'get_hosts' => sub {
+    my $fake_res = encode_json({
+            "hosts" => [ {
+                    "createdAt" => 1416151310,
+                    "id"        => "test_host_id",
+                    "memo"      => "test memo",
+                    "role"      => { [ "test-role" ] },
+                },]
+        });
+    my $mackerel = WebService::Mackerel->new( api_key  => 'testapikey', service_name => 'test' );
+    mock($mackerel)->expects('get_hosts')->times(1)->returns($fake_res);
+
+    my $res = $mackerel->get_hosts();
+
+    is_deeply $res, $fake_res, 'get_hosts : response success';
+
+    Test::Double->verify;
+    Test::Double->reset;
+};
+
 done_testing;

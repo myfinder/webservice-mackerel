@@ -71,6 +71,43 @@ sub update_host {
     return $res->{content};
 }
 
+sub post_host_metrics {
+    my ($self, $args) = @_;
+    my $path = '/api/v0/tsdb';
+    my $res  = $self->{agent}->request('POST', $self->{mackerel_origin} . $path, {
+            content => encode_json $args,
+            headers => {
+                'content-type' => 'application/json',
+                'X-Api-Key'    => $self->{api_key},
+            },
+        });
+    return $res->{content};
+}
+
+sub get_latest_host_metrics {
+    my ($self, $args) = @_;
+    my $path = '/api/v0/tsdb/latest?hostId=' . $args->{hostId} . '&name=' . $args->{name};
+    my $res  = $self->{agent}->request('GET', $self->{mackerel_origin} . $path, {
+            headers => {
+                'content-type' => 'application/json',
+                'X-Api-Key'    => $self->{api_key},
+            },
+        });
+    return $res->{content};
+}
+
+sub get_hosts {
+    my ($self, $args) = @_;
+    my $path = '/api/v0/hosts.json';
+    my $res  = $self->{agent}->request('GET', $self->{mackerel_origin} . $path, {
+            headers => {
+                'content-type' => 'application/json',
+                'X-Api-Key'    => $self->{api_key},
+            },
+        });
+    return $res->{content};
+}
+
 1;
 __END__
 
