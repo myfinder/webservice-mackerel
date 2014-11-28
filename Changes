@@ -2,6 +2,10 @@ Revision history for Perl extension Webservice-Mackerel
 
 {{$NEXT}}
 
+0.01 2014-11-28T10:58:14Z
+
+    - first version release
+
 0.01_2 2014-11-11T15:54:36Z
 
     - change module name

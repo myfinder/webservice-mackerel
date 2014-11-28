@@ -6,7 +6,7 @@ use Carp qw/croak/;
 use JSON;
 use HTTP::Tiny;
 
-our $VERSION = "0.01_2";
+our $VERSION = "0.01";
 
 sub new {
     my ($class, %args) = @_;

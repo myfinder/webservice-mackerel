@@ -50,6 +50,7 @@
       "test" : {
          "requires" : {
             "Test::Double" : "0.05",
+            "Test::Fatal" : "0.013",
             "Test::More" : "0.98"
          }
       }
@@ -66,7 +67,7 @@
          "web" : "https://github.com/myfinder/webservice-mackerel"
       }
    },
-   "version" : "0.01_2",
+   "version" : "0.01",
    "x_contributors" : [
       "Tatsuro Hisamori <medianetworks@gmail.com>"
    ]
