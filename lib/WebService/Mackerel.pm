@@ -71,6 +71,32 @@ sub update_host {
     return $res->{content};
 }
 
+sub update_host_status {
+    my ($self, $args) = @_;
+    my $path = '/api/v0/hosts/' . $args->{hostId} . '/status';
+    my $res  = $self->{agent}->request('POST', $self->{mackerel_origin} . $path, {
+            content => encode_json $args->{data},
+            headers => {
+                'content-type' => 'application/json',
+                'X-Api-Key'    => $self->{api_key},
+            },
+        });
+    return $res->{content};
+}
+
+sub host_retire {
+    my ($self, $hostId) = @_;
+    my $path = '/api/v0/hosts/' . $hostId . '/retire';
+    my $res  = $self->{agent}->request('POST', $self->{mackerel_origin} . $path, {
+            content => encode_json +{},
+            headers => {
+                'content-type' => 'application/json',
+                'X-Api-Key'    => $self->{api_key},
+            },
+        });
+    return $res->{content};
+}
+
 sub post_host_metrics {
     my ($self, $args) = @_;
     my $path = '/api/v0/tsdb';
