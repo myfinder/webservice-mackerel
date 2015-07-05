@@ -2,6 +2,9 @@ Revision history for Perl extension Webservice-Mackerel
 
 {{$NEXT}}
 
+0.02 2015-07-05T08:05:11Z
+    - add the unimplemented methods. thanks @__papix__
+
 0.01 2014-11-28T10:58:14Z
 
     - first version release
