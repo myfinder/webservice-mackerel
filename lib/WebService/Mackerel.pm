@@ -134,6 +134,56 @@ sub get_hosts {
     return $res->{content};
 }
 
+sub create_monitor {
+    my ($self, $args) = @_;
+    my $path = '/api/v0/monitors';
+    my $res  = $self->{agent}->request('POST', $self->{mackerel_origin} . $path, {
+            content => encode_json $args,
+            headers => {
+                'content-type' => 'application/json',
+                'X-Api-Key'    => $self->{api_key},
+            },
+        });
+    return $res->{content};
+}
+
+sub get_monitor {
+    my ($self, $args) = @_;
+    my $path = '/api/v0/monitors';
+    my $res  = $self->{agent}->request('GET', $self->{mackerel_origin} . $path, {
+            headers => {
+                'content-type' => 'application/json',
+                'X-Api-Key'    => $self->{api_key},
+            },
+        });
+    return $res->{content};
+}
+
+sub update_monitor {
+    my ($self, $monitorId, $args) = @_;
+    my $path = '/api/v0/monitors/' . $monitorId;
+    my $res  = $self->{agent}->request('PUT', $self->{mackerel_origin} . $path, {
+            content => encode_json $args,
+            headers => {
+                'content-type' => 'application/json',
+                'X-Api-Key'    => $self->{api_key},
+            },
+        });
+    return $res->{content};
+}
+
+sub delete_monitor {
+    my ($self, $monitorId) = @_;
+    my $path = '/api/v0/monitors/' . $monitorId;
+    my $res  = $self->{agent}->request('DELETE', $self->{mackerel_origin} . $path, {
+            headers => {
+                'content-type' => 'application/json',
+                'X-Api-Key'    => $self->{api_key},
+            },
+        });
+    return $res->{content};
+}
+
 1;
 __END__
 
