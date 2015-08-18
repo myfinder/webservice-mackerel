@@ -159,19 +159,129 @@ subtest 'get_latest_host_metrics' => sub {
 
 subtest 'get_hosts' => sub {
     my $fake_res = encode_json({
-            "hosts" => [ {
-                    "createdAt" => 1416151310,
-                    "id"        => "test_host_id",
-                    "memo"      => "test memo",
-                    "role"      => { [ "test-role" ] },
-                },]
-        });
+        "hosts" => [ {
+            "createdAt" => 1416151310,
+            "id"        => "test_host_id",
+            "memo"      => "test memo",
+            "role"      => { [ "test-role" ] },
+        },]
+    });
     my $mackerel = WebService::Mackerel->new( api_key  => 'testapikey', service_name => 'test' );
     mock($mackerel)->expects('get_hosts')->times(1)->returns($fake_res);
 
     my $res = $mackerel->get_hosts();
 
     is_deeply $res, $fake_res, 'get_hosts : response success';
+
+    Test::Double->verify;
+    Test::Double->reset;
+};
+
+subtest 'create_monitor' => sub {
+    my $fake_res = encode_json({
+        "id"            => "test_monitor_id",
+        "type"          => "host",
+        "name"          => "disk.aa-00.writes.delta",
+        "duration"      => 3,
+        "metric"        => "disk.aa-00.writes.delta",
+        "operator"      => ">",
+        "warning"       => 20000,
+        "critical"      => 400000,
+        "scopes"        => [ "Test"],
+        "excludeScopes" => [ "Test: staging" ],
+    });
+    my $mackerel = WebService::Mackerel->new( api_key  => 'testapikey', service_name => 'test' );
+    mock($mackerel)->expects('create_monitor')->times(1)->returns($fake_res);
+
+    my $res = $mackerel->create_monitor({
+        "type"          => "host",
+        "name"          => "disk.aa-00.writes.delta",
+        "duration"      => 3,
+        "metric"        => "disk.aa-00.writes.delta",
+        "operator"      => ">",
+        "warning"       => 20000,
+        "critical"      => 400000,
+        "scopes"        => [ "Test"],
+        "excludeScopes" => [ "Test: staging" ],
+    });
+
+    is_deeply $res, $fake_res, 'create_monitor : response success';
+
+    Test::Double->verify;
+    Test::Double->reset;
+};
+
+subtest 'get_monitor' => sub {
+    my $fake_res = encode_json({
+        "monitors" => [ {
+            "id"            => "test_monitor_id",
+            "type"          => "host",
+            "name"          => "disk.aa-00.writes.delta",
+            "duration"      => 3,
+            "metric"        => "disk.aa-00.writes.delta",
+            "operator"      => ">",
+            "warning"       => 20000,
+            "critical"      => 400000,
+            "scopes"        => [ "Test"],
+            "excludeScopes" => [ "Test: staging" ],
+        },]
+    });
+    my $mackerel = WebService::Mackerel->new( api_key  => 'testapikey', service_name => 'test' );
+    mock($mackerel)->expects('get_monitor')->times(1)->returns($fake_res);
+
+    my $res = $mackerel->get_monitor();
+
+    is_deeply $res, $fake_res, 'get_monitor : response success';
+
+    Test::Double->verify;
+    Test::Double->reset;
+};
+
+subtest 'update_monitor' => sub {
+    my $fake_res = encode_json({
+        "id" => "test_monitor_id",
+    });
+    my $mackerel = WebService::Mackerel->new( api_key  => 'testapikey', service_name => 'test' );
+    mock($mackerel)->expects('update_monitor')->times(1)->returns($fake_res);
+
+    my $res = $mackerel->update_monitor("test_monitor_id", {
+        "type"          => "host",
+        "name"          => "disk.aa-00.writes.delta",
+        "duration"      => 3,
+        "metric"        => "disk.aa-00.writes.delta",
+        "operator"      => ">",
+        "warning"       => 20000,
+        "critical"      => 400000,
+        "scopes"        => [ "Test"],
+        "excludeScopes" => [ "Test: staging" ],
+    });
+
+    is_deeply $res, $fake_res, 'update_monitor : response success';
+
+    Test::Double->verify;
+    Test::Double->reset;
+};
+
+subtest 'delete_monitor' => sub {
+    my $fake_res = encode_json({
+        "id"            => "test_monitor_id",
+        "type"          => "host",
+        "name"          => "disk.aa-00.writes.delta",
+        "duration"      => 3,
+        "metric"        => "disk.aa-00.writes.delta",
+        "operator"      => ">",
+        "warning"       => 20000,
+        "critical"      => 400000,
+        "scopes"        => [ "Test"],
+        "excludeScopes" => [ "Test: staging" ],
+    });
+    my $mackerel = WebService::Mackerel->new( api_key  => 'testapikey', service_name => 'test' );
+    mock($mackerel)->expects('delete_monitor')->times(1)->returns($fake_res);
+
+    my $res = $mackerel->delete_monitor("test_monitor_id", {
+    });
+
+    is_deeply $res, $fake_res, 'delete_monitor : response success';
 
     Test::Double->verify;
     Test::Double->reset;
