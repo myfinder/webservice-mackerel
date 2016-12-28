@@ -5,6 +5,7 @@ use warnings;
 use Carp qw/croak/;
 use JSON;
 use HTTP::Tiny;
+use URI;
 
 our $VERSION = "0.03";
 
@@ -110,6 +111,20 @@ sub post_host_metrics {
     return $res->{content};
 }
 
+sub get_host_metrics {
+    my ($self, $host_id, $query_parameters) = @_;
+    my $uri = URI->new($self->{mackerel_origin});
+    $uri->path("/api/v0/hosts/$host_id/metrics");
+    $uri->query_form($query_parameters);
+    my $res = $self->{agent}->request('GET', $uri->as_string, {
+            headers => {
+                'content-type' => 'application/json',
+                'X-Api-Key'    => $self->{api_key},
+            },
+        });
+    return $res->{content};
+}
+
 sub get_latest_host_metrics {
     my ($self, $args) = @_;
     my $path = '/api/v0/tsdb/latest?hostId=' . $args->{hostId} . '&name=' . $args->{name};
@@ -123,9 +138,11 @@ sub get_latest_host_metrics {
 }
 
 sub get_hosts {
-    my ($self, $args) = @_;
-    my $path = '/api/v0/hosts.json';
-    my $res  = $self->{agent}->request('GET', $self->{mackerel_origin} . $path, {
+    my ($self, $query_parameters) = @_;
+    my $uri = URI->new($self->{mackerel_origin});
+    $uri->path('/api/v0/hosts.json');
+    $uri->query_form($query_parameters);
+    my $res = $self->{agent}->request('GET', $uri->as_string, {
             headers => {
                 'content-type' => 'application/json',
                 'X-Api-Key'    => $self->{api_key},

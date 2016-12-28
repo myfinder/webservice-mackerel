@@ -157,26 +157,6 @@ subtest 'get_latest_host_metrics' => sub {
     Test::Double->reset;
 };
 
-subtest 'get_hosts' => sub {
-    my $fake_res = encode_json({
-        "hosts" => [ {
-            "createdAt" => 1416151310,
-            "id"        => "test_host_id",
-            "memo"      => "test memo",
-            "role"      => { [ "test-role" ] },
-        },]
-    });
-    my $mackerel = WebService::Mackerel->new( api_key  => 'testapikey', service_name => 'test' );
-    mock($mackerel)->expects('get_hosts')->times(1)->returns($fake_res);
-
-    my $res = $mackerel->get_hosts();
-
-    is_deeply $res, $fake_res, 'get_hosts : response success';
-
-    Test::Double->verify;
-    Test::Double->reset;
-};
-
 subtest 'create_monitor' => sub {
     my $fake_res = encode_json({
         "id"            => "test_monitor_id",
