@@ -69,11 +69,11 @@
          "web" : "https://github.com/myfinder/webservice-mackerel"
       }
    },
-   "version" : "0.03",
+   "version" : "0.04",
    "x_contributors" : [
       "Tatsuro Hisamori <medianetworks@gmail.com>",
-      "papix <mail@papix.net>",
-      "yohei yoshimuta <yoheimuta@gmail.com>"
+      "yohei yoshimuta <yoheimuta@gmail.com>",
+      "papix <mail@papix.net>"
    ],
    "x_serialization_backend" : "JSON::PP version 2.27300_01"
 }
