@@ -201,6 +201,58 @@ sub delete_monitor {
     return $res->{content};
 }
 
+sub create_graph_annotation {
+    my ($self, $args) = @_;
+    my $path = '/api/v0/graph-annotations';
+    my $res  = $self->{agent}->request('POST', $self->{mackerel_origin} . $path, {
+            content => encode_json $args,
+            headers => {
+                'content-type' => 'application/json',
+                'X-Api-Key'    => $self->{api_key},
+            },
+        });
+    return $res->{content};
+}
+
+sub get_graph_annotations {
+    my ($self, $query_parameters) = @_;
+    my $uri = URI->new($self->{mackerel_origin});
+    $uri->path('/api/v0/graph-annotations');
+    $uri->query_form($query_parameters);
+    my $res = $self->{agent}->request('GET', $uri->as_string, {
+            headers => {
+                'content-type' => 'application/json',
+                'X-Api-Key'    => $self->{api_key},
+            },
+        });
+    return $res->{content};
+}
+
+sub update_graph_annotation {
+    my ($self, $graphAnnotationId, $args) = @_;
+    my $path = '/api/v0/graph-annotations/' . $graphAnnotationId;
+    my $res  = $self->{agent}->request('PUT', $self->{mackerel_origin} . $path, {
+            content => encode_json $args,
+            headers => {
+                'content-type' => 'application/json',
+                'X-Api-Key'    => $self->{api_key},
+            },
+        });
+    return $res->{content};
+}
+
+sub delete_graph_annotation {
+    my ($self, $graphAnnotationId) = @_;
+    my $path = '/api/v0/graph-annotations/' . $graphAnnotationId;
+    my $res  = $self->{agent}->request('DELETE', $self->{mackerel_origin} . $path, {
+            headers => {
+                'content-type' => 'application/json',
+                'X-Api-Key'    => $self->{api_key},
+            },
+        });
+    return $res->{content};
+}
+
 1;
 __END__
 

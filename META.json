@@ -4,7 +4,7 @@
       "Tatsuro Hisamori <myfinder@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v3.0.1, CPAN::Meta::Converter version 2.150010",
+   "generated_by" : "Minilla/v3.0.9, CPAN::Meta::Converter version 2.150005",
    "license" : [
       "perl_5"
    ],
@@ -73,7 +73,7 @@
    "x_contributors" : [
       "Tatsuro Hisamori <medianetworks@gmail.com>",
       "papix <mail@papix.net>",
-      "yoheimuta <yoheimuta@gmail.com>"
+      "yohei yoshimuta <yoheimuta@gmail.com>"
    ],
-   "x_serialization_backend" : "JSON::PP version 2.27400"
+   "x_serialization_backend" : "JSON::PP version 2.27300_01"
 }
