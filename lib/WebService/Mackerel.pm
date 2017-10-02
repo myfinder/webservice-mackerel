@@ -16,7 +16,7 @@ sub new {
     my $self = {
         api_key         => $args{api_key},
         service_name    => $args{service_name},
-        mackerel_origin => $args{mackerel_origin} || 'https://mackerel.io',
+        mackerel_origin => $args{mackerel_origin} || 'https://api.mackerelio.com',
         agent           => HTTP::Tiny->new( agent => "WebService::Mackerel agent $VERSION" ),
     };
     bless $self, $class;
