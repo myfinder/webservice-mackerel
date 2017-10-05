@@ -7,7 +7,7 @@ use JSON;
 use HTTP::Tiny;
 use URI;
 
-our $VERSION = "0.04";
+our $VERSION = "0.05";
 
 sub new {
     my ($class, %args) = @_;
