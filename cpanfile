@@ -1,3 +1,4 @@
+requires 'URI';
 requires 'perl', '5.008001';
 requires 'JSON', '>= 2.90';
 requires 'HTTP::Tiny', '>= 0.050';
